@@ -145,21 +145,13 @@
 ---
 
 - **Basic Structure of spaCy**
-  - Event sequences  
-  - Dramatic tension curves (e.g., Freytag's pyramid)  
 
-- **Name Entity Recognition**
-  - Named entity recognition  
-  - Frame detection and valence analysis  
 
-- **Grammar-Based Parsing (Basic)**
-  - Dependency parsing  
-  - Sentence role identification (subject, object, action)  
+- **Some Application of spaCy I**
 
-- **Applications**
-  - Political discourse analysis  
-  - Media studies and framing  
-  - Historical narratives and public opinion  
+
+- **Some Application of spaCy II**
+
 
 ---
 
@@ -183,3 +175,7 @@
   - Media studies and framing  
   - Historical narratives and public opinion  
 
+
+
+## Access to Corpora and datasets
+For access to the corpora and datasets used in the lectures and exercises, please contact me.
