@@ -1,0 +1,255 @@
+---
+title: "s2"
+author: "Mahdi"
+date: "2025-05-23"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+```{r load all required packages, include=FALSE}
+# Load required packages
+library("readtext")
+library("tm")
+library("SnowballC")
+library("wordcloud")
+library("textclean")
+library("textdata")
+library("tidytext")
+library("tokenizers")
+library("quanteda")
+library("quanteda.textmodels")
+library("quanteda.textplots")
+library("quanteda.textstats")
+library("textstem")
+library("stringr")
+library("syuzhet")
+library("topicmodels")
+library("ggplot2")
+library("countdown")
+library("tidyr")
+library("dplyr")
+library("readxl")
+```
+
+
+```{r load all required packages, include=FALSE}
+fileAddress1 <- '../../corpusExample/unSpeeches2000_2010'
+dfUNSpeech <- readtext(paste0(fileAddress1, "/*.txt"), 
+                           docvarsfrom = "filenames",
+                           docvarnames = c("isoAlpha", "session", "year"),
+                           dvsep = "_",
+                           encoding = "ISO-8859-1")
+fileAddress2 = '../../corpusExample/speakersSession.xlsx'
+speakerData <- read_excel(fileAddress2)
+dfUNSpeechComplete <- inner_join(dfUNSpeech, speakerData, by = c("isoAlpha", 'year'))
+corpusUNSpeechComplete <- corpus(dfUNSpeechComplete) 
+
+```
+
+
+## A very first step 
+You need to set a directory where all files are. 
+
+```{r set the directory}
+# make sure that you set the directory correctly
+# setwd("C:/Users/bax1408/Dropbox/code/courseTeach/computationalSocialScience/_R/s1")
+setwd("F:/Mahdi/Dropbox/Dropbox/code/courseTeach/computationalSocialScience/_R/s1")
+```
+
+Let us check the directory!
+
+```{r check the directory}
+# make sure that you set the directory correctly
+print(getwd())
+```
+
+
+## Session 2: Bag of Words 
+
+
+## Part 1: Bag of Words Creation 
+We need to represent words in numbers. 
+- Bag of words 
+- Embedding 
+
+The simplest approach is to count the number of time a word appears in each document. 
+
+## Steps 
+1. convert all words to lowercase. 
+2. Remove punctuation. 
+3. Remove stop words 
+4. Create equivalence class
+5. Filter by Frequency 
+
+
+
+## Steps 1 to 3  
+We convert the corpus to tokens.
+Feed the corpus to ´tokens()´ command!
+For ngram tokenization use ´tokens_ngrams()´ command! 
+
+```{r}
+tokenUNSpeechCompleteClean <- quanteda::tokens(
+  corpusUNSpeechComplete, 
+  remove_numbers = TRUE,
+  remove_punct = TRUE, 
+  remove_symbols = TRUE,
+  remove_url = TRUE
+) %>% 
+  tokens_remove(stopwords("english"))
+tokenUNSpeechCompleteClean[1]
+```
+## Step 4: stimming 
+We create equivalence classes. 
+
+
+
+```{r} 
+tokenUNSpeechCompleteCleanStemmed <- tokenUNSpeechCompleteClean %>%
+  tokens_wordstem(language = "english")
+```
+
+
+## Step 4: Lemmatization 
+
+```{r}
+# Lemmatize the character tokens
+lemmatized <- lemmatize_words(as.character(tokenUNSpeechCompleteClean))
+
+```
+
+
+## Step 5:
+Use ´dfm()´ command to convert the token object to document-word matrix
+
+
+```{r}
+DWMUNSpeechCompleteClean <- dfm(tokenUNSpeechCompleteCleanStemmed)
+DWMUNSpeechCompleteClean
+```
+
+
+## Step 5-1: filtering by frequency 
+
+# Filter out terms appearing in fewer than 2 docs and in more than 90% of docs
+```{r}
+DWMUNSpeechCompleteCleanFilterd <- dfm_trim(DWMUNSpeechCompleteClean, 
+                         min_docfreq = 5,         # appear in at least 2 docs
+                         max_docfreq = 50,       # appear in less than 90% of docs
+                         docfreq_type = "count")   # interpret docfreq as proportion
+DWMUNSpeechCompleteCleanFilterd
+```
+
+
+## Word Cloud 
+
+```{r}
+textplot_wordcloud(DWMUNSpeechCompleteCleanFilterd,max_words =50)
+```
+
+## Exercise 1.2
+
+```{r countdown, echo=FALSE}
+countdown(minutes = 0, seconds = 15)
+```
+
+
+
+
+
+## Part 2: Bag of Words various Matrices 
+
+## Various Matrices 
+- Word count 
+
+
+## Various Matrices 
+- Word count 
+- Term frequency 
+
+## Term Frequency 
+
+$$
+Word\_Frequency_{ij} = \frac{\text{Number of appearances of word } i}{\text{Total number of words in document } j}
+$$
+
+## Term Frequency Features 
+
+- Normalize the word count with respect to length of the text 
+  - Possibility of comparing appearance of one/multiple words in two document with different length.  
+
+## Term Frequency: Example 
+
+```{r}
+TFUNSpeechCompleteCleanFilterd <- dfm_weight(DWMUNSpeechCompleteCleanFilterd, scheme = "prop")
+TFUNSpeechCompleteCleanFilterd
+```
+
+
+## Various Matrices 
+- Word count 
+- Term frequency 
+- Term frequency-inverse document frequency (TF-IDF)
+
+## TF-IDF
+- $t$ is the term,
+
+- $d$ is the specific document,
+
+- $D$ is the corpus (set of documents),
+
+- $tf(t,d)$ is the term frequency of term tt in document dd,
+
+- $df(t)$ is the document frequency (number of documents in which the term $t$ appears),
+
+- $N$ is the total number of documents in the corpus DD.
+
+$$
+\text{TF-IDF}(t, d, D) = \text{tf}(t, d) \cdot \log\left(\frac{N}{\text{df}(t)}\right)
+
+$$
+
+## TF-IDF: Idea 
+- It is an attempt to capture meaning of each document. 
+- If a word appears in all documents, that word is not informative about that document. 
+- 
+
+
+
+
+## TF-IDF: Example 
+
+```{r}
+
+```
+
+
+## Exercise 1.5
+
+```{r countdown, echo=FALSE}
+countdown(minutes = 0, seconds = 15)
+```
+
+
+
+## Dictionary approach 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

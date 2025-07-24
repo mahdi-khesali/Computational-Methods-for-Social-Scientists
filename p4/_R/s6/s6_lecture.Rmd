@@ -1,0 +1,79 @@
+---
+title: "s2"
+author: "Mahdi"
+date: "2025-05-23"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+```{r load all required packages, include=FALSE}
+# Load required packages
+library("readtext")
+library("tm")
+library("SnowballC")
+library("wordcloud")
+library("textclean")
+library("textdata")
+library("tidytext")
+library("tokenizers")
+library("quanteda")
+library("quanteda.textmodels")
+library("quanteda.textplots")
+library("quanteda.textstats")
+library("textstem")
+library("stringr")
+library("syuzhet")
+library("topicmodels")
+library("ggplot2")
+library("countdown")
+library("tidyr")
+library("dplyr")
+```
+
+
+## A very first step 
+You need to set a directory where all files are. 
+
+```{r set the directory}
+# make sure that you set the directory correctly
+# setwd("C:/Users/bax1408/Dropbox/code/courseTeach/Computational Social Science/_R/s1")
+setwd("F:/Mahdi/Dropbox/Dropbox/code/courseTeach/computationalSocialScience/_R/s1")
+```
+
+Let us check the directory!
+
+```{r check the directory}
+# make sure that you set the directory correctly
+print(getwd())
+```
+
+
+
+## Session 6: Narrative Detection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
