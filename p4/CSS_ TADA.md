@@ -66,9 +66,11 @@
       - Difficulty with Synonymy and Polysemy 
       - Computational efficiency  
 
+  **Sentiment Analysis as an Example of Dictionary Approach**
+
 ---
 
-### Session 3: Distributed Representations (Word Embedding
+### Session 3: Distributed Representations (Word Embedding)
 ---
 
 - **Vector Space Model Intuition**
