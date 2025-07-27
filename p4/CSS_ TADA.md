@@ -75,13 +75,16 @@
 ---
 
 - **Vector Space Model Intuition**
-  - Semantic similarity  
+  - The basic behind distributed representations
+  - Different types of word embeddings
   - Analogies  
 
 
 - **Word Embedding Models**
+  - LSA (Latent Semantic Analysis)
   - Word2Vec  
   - GloVe  
+  - FastText
   - Contextual embeddings (e.g., BERT)  
 
 
@@ -89,6 +92,14 @@
 - **Visualizing Embeddings**
   - Dimensionality reduction (PCA, t-SNE)  
   - Cluster analysis of semantic fields  
+
+
+- **Contextual Embedding**
+  - Intuition behind contextual embeddings
+  - Examples of contextual embeddings
+  - BERT
+  - Attention Mechanism
+
 
 ---
 
