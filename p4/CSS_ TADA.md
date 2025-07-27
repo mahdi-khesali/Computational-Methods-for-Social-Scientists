@@ -36,14 +36,15 @@
 - **Tokenization**
   - Word and sentence tokenization  
 
-- **Stop Words**
-  - Standard lists  
-  - Domain-specific customization  
 
-- **Stemming / Lemmatization**
-  - Rule-based vs. dictionary-based approaches  
-  - Use cases and consequences  
-
+- Preprocessing Text
+  - Lowercasing, punctuation removal  
+  - Handling uninformative words (e.g., articles, pronomens)  
+    - Standard lists  
+    - Domain-specific customization
+  - Normalization techniques
+    - Stemming 
+    - Lemmatization
 ---
 
 ### Session 2: Bag of Words
